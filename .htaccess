@@ -1,0 +1,16 @@
+RewriteEngine On
+
+Options -Indexes
+
+# Preventing Redirect loop
+RewriteRule ^(frontend|backend)/web/ - [L] 
+RewriteRule ^(common)/web/ - [L]
+
+RewriteCond %{REQUEST_URI} !^/api
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_URI} !^/backend
+RewriteCond %{REQUEST_URI} !^/swagger
+RewriteCond %{REQUEST_URI} !^/upload
+
+#RewriteRule ^(.*)$ backend/web/index.php/$1 [L] 
+RewriteRule ^(.*)$ /frontend/web/index.php/$1 [L] 
