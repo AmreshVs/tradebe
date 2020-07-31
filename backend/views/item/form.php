@@ -105,13 +105,13 @@ use backend\models\MainCategory;
                             <div class="col-md-5">
                               <div class="form-group">
                                 <label for="exampleInputName2">Specification Name</label>
-                                <input type="text" value="<?= $spec['item_specification_name'] ?>" class="form-control" id="exampleInputName2" name="Specification[][name]" placeholder="RAM" required>
+                                <input type="text" value="<?= $spec['item_specification_name'] ?>" class="form-control" id="exampleInputName2" name="Specification[][name]" placeholder="RAM">
                               </div>
                             </div>
                             <div class="col-md-5">
                               <div class="form-group">
                                 <label for="exampleInputEmail2">Specification Value</label>
-                                <input type="text" class="form-control" value="<?= $spec['item_specification_value'] ?>" id="exampleInputEmail2" name="Specification[][value]" placeholder="16gb" required>
+                                <input type="text" class="form-control" value="<?= $spec['item_specification_value'] ?>" id="exampleInputEmail2" name="Specification[][value]" placeholder="16gb">
                               </div>
                           </div>
                       </div>
@@ -133,13 +133,13 @@ use backend\models\MainCategory;
                       <div class="col-md-5">
                         <div class="form-group">
                           <label for="exampleInputName2">Specification Name</label>
-                          <input type="text" class="form-control" id="exampleInputName2" name="Specification[][name]" placeholder="RAM" required>
+                          <input type="text" class="form-control" id="exampleInputName2" name="Specification[][name]" placeholder="RAM">
                         </div>
                       </div>
                       <div class="col-md-5">
                         <div class="form-group">
                           <label for="exampleInputEmail2">Specification Value</label>
-                          <input type="text" class="form-control" id="exampleInputEmail2" name="Specification[][value]" placeholder="16gb" required>
+                          <input type="text" class="form-control" id="exampleInputEmail2" name="Specification[][value]" placeholder="16gb">
                         </div>
                     </div>
                 </div>

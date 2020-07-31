@@ -9,6 +9,8 @@ use backend\models\ItemSearch;
 use backend\models\Category;
 
 use common\models\LoginForm;
+use yii\db\Expression;
+
 
 
 /**
@@ -71,6 +73,7 @@ class ItemController extends CController
     {
         $model = Item::findOne($id);
         $modeSpecArr = ItemSpecification::find()->where(['item_id' => $model->getPrimaryKey()])->asArray()->all();
+        $request = Yii::$app->request->post();
      
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
@@ -133,6 +136,22 @@ class ItemController extends CController
         $model = Category::getShopCategoryData($request['id']);
         
         return $this->asJson(['status'=> 200, 'data' => $model]);
+    }
+
+    public function actionTest()
+    {
+        $models = Item::find()->all();
+        foreach ($models as $key => $model) {
+       
+            $Category = Category::find()->where(['main_category_id' => $model->main_category_id])->orderBy(new Expression('rand()'))->one();
+            $sub_category = Category::find()->where(['parent_category' => $model->category_id])->orderBy(new Expression('rand()'))->one();
+            if($Category != null && $sub_category != null){
+                $model->category_id = $Category->category_id;
+                $model->sub_category_id = $sub_category->category_id;
+                $model->save();
+                //die('wrk');
+            }
+        }
     }
 
 

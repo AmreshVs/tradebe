@@ -41,7 +41,7 @@ use yii\helpers\Url;
                   <div class="row p-lg-2">
                      <div class="col-md-6">
                         <?php if(!$model->getIsNewRecord()){ ?>
-                           <img src="<?= $model->banner_image_path ?>" alt="..." class="img-thumbnai"/>
+                           <img src="<?= $model->banner_image_path ?>" alt="..." width="500" height="200" class="img-thumbnai"/>
                      <?php } ?>
                         <?= $form->field($modelFrom, 'file')->fileInput() ?>
                      </div>
