@@ -12,8 +12,9 @@ $rules =[
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 ];
 
-if(count($scopeRules))
-    $rules = arrar_merge($rules ,$scopeRules);
+if(isset($scopeRules)){
+  $rules = arrar_merge($rules ,$scopeRules);
+}
 
 switch (APP_USER_SCOPE) {
     case ACCESS_RULE_VENDOR:

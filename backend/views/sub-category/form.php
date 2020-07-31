@@ -53,11 +53,10 @@ use backend\models\Category;
                      </div>
                   </div>
                   <div class= "col-md-12 text-center">
-                     <?= Html::a('Cancel', Url::to(['/sub-category']), ['class' => 'btn btn-secondary']); ?>
-                     <?= Html::submitButton('Save',
-            ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Cancel', Url::to(['/sub-category']), ['class' => 'btn btn-secondary']); ?>
+                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
                   </div>
-                       <?php ActiveForm::end(); ?>
+                  <?php ActiveForm::end(); ?>
                </div>
             </div>
          </div>
