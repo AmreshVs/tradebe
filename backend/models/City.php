@@ -30,7 +30,7 @@ class City extends \yii\db\ActiveRecord
         return [
             [['city_status'], 'integer'],
             [['city_name'], 'string', 'max' => 256],
-            [['city_name', 'city_status'], 'required'],
+            [['city_name'], 'required'],
             ['city_name', 'unique']
         ];
     }

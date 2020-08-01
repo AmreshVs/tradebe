@@ -36,7 +36,7 @@ class CityController extends CController
         $model = new City();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
-            return $this->redirect(['index']);
+            return $this->asJson(['status' => 200, 'msg' => 'Saved!']);
         }
         return $this->render('form', ['model' => $model]);
 

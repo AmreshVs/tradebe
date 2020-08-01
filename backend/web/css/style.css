@@ -157,6 +157,7 @@ body {
 
 #sidenav_content{
   width: calc(100% - 225px);
+  min-height: 100vh;
   margin-left: 225px;
   margin-top: 56px;
   background-color: #f8f8f8;
@@ -165,6 +166,7 @@ body {
 
 .nav-side{
   display: block;
+  height: 100vh;
 }
 
 .nav-side .nav-link:hover{
@@ -173,7 +175,17 @@ body {
 
 .nav-side .nav-link{
   display: flex;
-  padding: 10px 28px;
+  padding: 10px 20px;
+  transition: all .3s;
+}
+
+.nav-side .nav-link.active{
+  background: #007bff;
+  color: #FFF !important
+}
+
+.nav-side .nav-link.active .sb-nav-link-icon{
+  color: #FFF !important;
 }
 
 .topnav{
@@ -183,15 +195,115 @@ body {
   background-color: #FFF;
 }
 
+.topnav .btn-link{
+  padding: 5px;
+}
+
 .navbar-brand{
   margin-left: 14px;
 }
 
 .sb-sidenav-toggled #side-layout{
-  width: 70px;
+  width: 60px;
 }
 
 .sb-sidenav-toggled #sidenav_content{
-  width: calc(100% - 70px);
-  margin-left: 70px;
+  width: calc(100% - 60px);
+  margin-left: 60px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgb(0 0 0 / 1%) !important;
+}
+
+.table-bordered td, .table-bordered th {
+  vertical-align: middle;
+}
+
+tbody{
+  background-color: #FFF;
+}
+
+thead a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch.sm{
+  height: 25px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch.sm .slider:before{
+  height: 17px;
+  width: 17px;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch.sm input:checked + .slider:before {
+  -webkit-transform: translateX(35px);
+  -ms-transform: translateX(35px);
+  transform: translateX(35px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.help-block-error {
+  color: #dc3545;
 }

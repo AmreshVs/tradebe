@@ -5,7 +5,7 @@ $user = Yii::$app->getUser()->getIdentity();
 ?>
 
 <nav class="topnav navbar navbar-expand shadow-sm">
-  <button class="btn btn-link order-1 order-lg-0" id="sidebarToggle" href="#">
+  <button class="btn btn-link" id="sidebarToggle" href="#">
     <em class="fas fa-bars"></em>
   </button>
   <a class="navbar-brand" href="index.html">India Mart</a>
