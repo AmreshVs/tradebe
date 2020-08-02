@@ -17,7 +17,11 @@ return [
             'class' => api\modules\v1\Module::class
         ]
     ],
-    'components' => [        
+    'components' => [     
+         'request' => [
+            'enableCookieValidation' => false,
+            'enableCsrfValidation' => false,
+        ],   
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
