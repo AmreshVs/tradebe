@@ -137,9 +137,9 @@ class ProductController extends HelpController
             'order' => $model,
             'spec' => $spec
         ])
-        ->setFrom([\Yii::$app->params['supportEmail'] => 'Test Mail'])
-        ->setTo('saravananr668@gmail.com')
-        ->setSubject('This is a test mail ' )
+        ->setFrom([\Yii::$app->params['supportEmail'] => 'India Mart'])
+        ->setTo($request['email'])
+        ->setSubject('Thanks for Booking' )
         ->send();
         return $this->asJson(['status' => 200, 'data' => [], 'msg' => 'Booking Successfully']);
 
