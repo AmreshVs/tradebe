@@ -45,7 +45,6 @@ class Item extends \yii\db\ActiveRecord
                 //'last_name',
                 'vendor_id',
                 'unit_name',
-                'item_status',
                 'item_desc',
                 'main_category_id'
             ], 'required'],

@@ -19,4 +19,13 @@
     e.preventDefault();
     $('body').toggleClass('sb-sidenav-toggled');
   });
+
+  // $('.select2').select2();
+
 })(jQuery);
+
+$(document).bind("ajaxSend", function () {
+  NProgress.start();
+}).bind("ajaxComplete", function () {
+  NProgress.done();
+});

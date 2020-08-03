@@ -9,16 +9,21 @@ use yii\grid\ActionColumn;
 use backend\models\City;
 
 $model = new City;
+
+$name = 'City';
+$baseUrl = Url::to(['/city']);
+$this->title = 'Cities';
+
 ?>
 
 <div class="container-fluid">
-  <h2 class="mt-2 mb-3">Cities</h2>
+  <h2 class="mt-2 mb-3"><?=$this->title?></h2>
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <button class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#createCityModal">
+          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#CityModal">
             <em class="fa fa-plus-circle"></em>
             Create
           </button>
@@ -37,7 +42,7 @@ $model = new City;
                 'value' => function ($data) {
                   return '
                     <label class="switch sm mb-0">
-                      <input type="checkbox" id="city-city_status" name="City[city_status]" '.($data->city_status == 1 ? 'checked' : '').'>
+                      <input type="checkbox" class="status" id="city-city_status" name="City[city_status]" '.($data->city_status == 1 ? 'checked' : '').'>
                       <span class="slider round"></span>
                     </label>
                   ';
@@ -51,16 +56,17 @@ $model = new City;
                   'update' => function ($url, $model, $key) {
                     $html = Html::tag('span', '', ['class' => 'fas fa-edit']);
                     return  Html::a($html . ' Edit', $url, [
-                      'class' => 'btn btn-sm btn-secondary',
+                      'class' => 'btn btn-sm btn-secondary edit-btn',
+                      'data-toggle' => 'modal',
+                      'data-target' => '#CityModal'
                     ]);
                   },
                   'delete' => function ($url, $model, $key) {
-                    '<br>';
                     $html = Html::tag('span', '', ['class' => 'fas fa-trash']);
                     return Html::a($html . ' Delete', 'javascript:void(0)', [ 
                       'class' => 'ml-2 btn btn-sm btn-danger',
                       'data-pjax' => '0',
-                      'onclick' => 'test('.$model->getPrimarykey().')',
+                      'onclick' => 'deleteRow('.$model->getPrimarykey().')',
                       'data-method' => 'post',
                     ]);
                   },
@@ -74,85 +80,6 @@ $model = new City;
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="createCityModal" tabindex="-1" role="dialog" aria-labelledby="createCityModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createCityModalLabel"><?= $model->getIsNewRecord() ? 'Create City' : 'Update City' ?></h5>
-        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <?php include(Yii::$app->basePath . '/views/city/form.php'); ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="save">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-function test($url) {
-  swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to revert!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal("Category has been deleted!", {
-          icon: "success",
-        });
-        location.href = '<?= Url::to(['delete'])?>/' + $url;
-      } else {
-        swal("Your imaginary file is safe!");
-      }
-    });
-  return false;
-}
-
-$(document).ready(function() {
-  $('.status').change(function() {
-    $this = $(this);
-    var value = 0;
-    if ($(this).prop("checked") == true) {
-      value = 1;
-    }
-    $.ajax({
-      url: '<?= Url::to(['status'])?>',
-      data: {
-        id: $this.closest('tr').attr('data-key'),
-        status: value
-      },
-      success: function(json) {
-        toastr.success(json.msg, 'Success', {
-          timeOut: 3000
-        })
-      }
-    });
-  });
-});
-
-$('#save').on('click', function(){
-  let form = $('#category-form');
-  let url = form.attr('action');
-
-  $.ajax({
-    url: url,
-    method: 'POST',
-    data: form.serialize(),
-    success: function({ status, msg}){
-      if(status === 200){
-        location.reload();
-      }
-    }
-  })
-});
-
-</script>
+<?php
+  include(Yii::$app->basePath . '/views/common/modal.php');
+?>

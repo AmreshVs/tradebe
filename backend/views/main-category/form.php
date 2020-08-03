@@ -3,66 +3,39 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
+use backend\models\CategoryUploadForm;
+use backend\models\MainCategory;
 
+$model = new MainCategory;
+$modelForm = new CategoryUploadForm;
+$form = ActiveForm::begin(['id' => 'category-form', 'action' => Yii::$app->request->url]);
 ?>
 
-<main>
-   <div class="container-fluid">
-      <br>
-      <br>
-      <div class="row">
-         <div class="col-md-2"></div>
-         <div class="col-md-8">
-            <div class ="card">
-               <div class="card-body">
-                  <h4 class="card-title"><?= $model->getIsNewRecord() ? 'Create Category' : 'Update Category' ?></h4>
-                  <hr>
-               <?php $form = ActiveForm::begin(['id' => 'category-form']); ?>
-                 
-                  <div class="row p-lg-2">
-                     <div class="col-md-6">
-                        <div class="form-group">
-                            <?= $form->field($model, 'main_category_name')->textInput() ?>
-                        </div>
-                     </div>
-                     <div class ="col-md-6">
-                        <div class="form-group ">
-                           <label>Status</label>
-                            <?=$form->field($model, 'main_category_status')->checkbox([
-                              'data-toggle' => 'toggle',
-                              'data-on' => "Ready", 
-                              'data-off' => "Not Ready",
-                              'data-onstyle' => "primary",
-                              'data-offstyle' => "danger"
-                            ])->label(false) ?>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row p-lg-2">
-                     <div class="col-md-6">
-                        <?php if(!$model->getIsNewRecord()){ ?>
-                        <img src="<?= $model->main_category_image_path ?>" alt="image" class="img-thumbnail">
-                     <?php } ?>
-                        <?= $form->field($modelFrom, 'file')->fileInput() ?>
-                     </div>
-                  </div>
-                  <div class= "col-md-12 text-center">
-                     <?= Html::a('Cancel', Url::to(['/category']), ['class' => 'btn btn-secondary']); ?>
-                     <?= Html::submitButton('Save',
-            ['class' => 'btn btn-success']) ?>
-                  </div>
-                       <?php ActiveForm::end(); ?>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</main>
+<div class="form-group">
+  <label>Image</label>
 
+  <?php if(!$model->getIsNewRecord()){ ?>
+  <img src="<?= $model->main_category_image_path ?>" alt="..." width="500" height="200" class="img-thumbnai" />
+  <?php } else{ ?>
+    <img src="" id="selected-img" class="img-fluid mb-2 rounded d-none" alt="thumbnail" />
+  <?php } ?>
+  <div class="form-control p-1">
+    <?= $form->field($modelForm, 'file')->fileInput()->label(false); ?>
+  </div>
+</div>
 
-<style type="text/css">
- 
-</style>
-<script type="text/javascript">
-   
-</script>
+<div class="form-group">
+  <?= $form->field($model, 'main_category_name')->textInput() ?>
+</div>
+
+<div class="form-group">
+  <label class="w-100">Status</label>
+  <label class="switch">
+    <input type="checkbox" id="maincategory-main_category_status" name="MainCategory[main_category_status]" value="1">
+    <span class="slider round"></span>
+  </label>
+</div>
+
+<?php ActiveForm::end(); ?>
+
+<script src="/backend/web/js/common/imgToUrl.js"></script>

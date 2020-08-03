@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'category-form', 'action' => Url::to(['/city/create'])]); ?>
+<?php $form = ActiveForm::begin(['id' => 'category-form', 'action' => Yii::$app->request->url]); ?>
 <div class="form-group">
   <?= $form->field($model, 'city_name')->textInput() ?>
 </div>
