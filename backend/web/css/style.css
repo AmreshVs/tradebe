@@ -143,6 +143,7 @@ body {
 #side-layout{
   position: fixed;
   width: 225px;
+  height: calc(100% - 56px);
   display: inline-block;
   background-color: #FFF;
   margin-top: 56px;
@@ -166,7 +167,6 @@ body {
 
 .nav-side{
   display: block;
-  height: 100vh;
 }
 
 .nav-side .nav-link:hover{
@@ -180,12 +180,18 @@ body {
 }
 
 .nav-side .nav-link.active{
-  background: #007bff;
-  color: #FFF !important
+  background: #f8f8f8;
+  color: #007bff !important;
+  font-weight: 600;
 }
 
 .nav-side .nav-link.active .sb-nav-link-icon{
-  color: #FFF !important;
+  color: #007bff !important;
+}
+
+.sb-nav-link-icon svg{
+  font-size: 18px;
+  width: 25px !important;
 }
 
 .topnav{
@@ -196,20 +202,21 @@ body {
 }
 
 .topnav .btn-link{
-  padding: 5px;
+  padding: 0px 8px;
 }
 
 .navbar-brand{
   margin-left: 14px;
+  font-weight: 600;
 }
 
 .sb-sidenav-toggled #side-layout{
-  width: 60px;
+  width: 65px;
 }
 
 .sb-sidenav-toggled #sidenav_content{
-  width: calc(100% - 60px);
-  margin-left: 60px;
+  width: calc(100% - 65px);
+  margin-left: 65px;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -306,4 +313,12 @@ input:checked + .slider:before {
 
 .help-block-error {
   color: #dc3545;
+}
+
+.grid-view .summary{
+  padding-bottom: 10px;
+}
+
+.pull-right {
+  float: right;
 }

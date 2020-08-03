@@ -21,18 +21,13 @@
     <meta name="author" content="" />
 
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="/backend/web/css/nprogress/nprogress.css" rel="stylesheet">
 
     <script src="/backend/web/js/jquery/jquery-3.5.1.min.js"></script>
     <script src="/backend/web/js/bootstrap/bootstrap-4.5.0.min.js"></script>
     <script src="/backend/web/js/bootstrap/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="/backend/web/js/fontawesome/all.min.js"></script>
     <script src="/backend/web/js/sweetalert/sweetalert.min.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="/backend/web/js/nprogress/nprogress.js"></script>
 
     <?php 

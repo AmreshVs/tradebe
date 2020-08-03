@@ -56,7 +56,7 @@ $this->title = 'Main Category';
                 'template' => '{update}{delete}',
                 'buttons' => [
                   'update' => function ($url, $model, $key) {
-                    $html = Html::tag('span', '', ['class' => 'fas fa-edit']);
+                    $html = Html::tag('span', '', ['class' => 'fa fa-edit']);
                     return  Html::a($html . ' Edit', $url, [
                       'class' => 'btn btn-sm btn-secondary edit-btn',
                       'data-toggle' => 'modal',
@@ -64,7 +64,7 @@ $this->title = 'Main Category';
                     ]);
                   },
                   'delete' => function ($url, $model, $key) {
-                    $html = Html::tag('span', '', ['class' => 'fas fa-trash']);
+                    $html = Html::tag('span', '', ['class' => 'fa fa-trash']);
                     return Html::a($html . ' Delete', 'javascript:void(0)', [ 
                       'class' => 'ml-2 btn btn-sm btn-danger',
                       'data-pjax' => '0',

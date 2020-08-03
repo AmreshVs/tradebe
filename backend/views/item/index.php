@@ -57,7 +57,7 @@ $this->title = 'Items';
                 'template' => '{update}{delete}',
                 'buttons' => [
                   'update' => function ($url, $model, $key) {
-                    $html = Html::tag('span', '', ['class' => 'fas fa-edit']);
+                    $html = Html::tag('span', '', ['class' => 'fa fa-edit']);
                     return  Html::a($html . ' Edit', $url, [
                       'class' => 'btn btn-sm btn-secondary edit-btn',
                       'data-toggle' => 'modal',
@@ -65,7 +65,7 @@ $this->title = 'Items';
                     ]);
                   },
                   'delete' => function ($url, $model, $key) {
-                    $html = Html::tag('span', '', ['class' => 'fas fa-trash']);
+                    $html = Html::tag('span', '', ['class' => 'fa fa-trash']);
                     return Html::a($html . ' Delete', 'javascript:void(0)', [ 
                       'class' => 'ml-2 btn btn-sm btn-danger',
                       'data-pjax' => '0',
@@ -86,3 +86,58 @@ $this->title = 'Items';
 <?php
   include(Yii::$app->basePath . '/views/common/modal.php');
 ?>
+
+<script type="text/javascript">
+
+  $(document).on('click', '.btn-add', function(e) {
+    e.preventDefault();
+    fvrhtmlclone = $(".fvrduplicate").html();
+    $(fvrhtmlclone).appendTo(".fvrclone").hide().fadeIn(300);
+    $(this).removeClass('btn-add').addClass('btn-remove')
+      .removeClass('btn-success').addClass('btn-danger')
+      .html('<span class="fa fa-minus"></span> Remove');
+  }).on('click', '.btn-remove', function(e) {
+    e.preventDefault();
+    $(this).parent().parent().fadeOut(300, function(){ 
+      $(this).remove();
+    });
+  });
+
+
+  $(document).on('change', '#item-main_category_id', function() {
+    $("#item-category_id").html('<option value="">Loading...</option>');
+    $.ajax({
+      type: "POST",
+      url: '<?=Url::to(['get-main-category'])?>',
+      data: {
+        id: $(this).val()
+      },
+      success: function(result) {
+        $("#item-category_id").html('<option value="">Please Select Option</option>');
+        $.each(result.data, function(idx, obj) {
+          $("#item-category_id").append('<option value="' + idx + '">' + obj + '</option>');
+        });
+        $('#item-category_id').trigger('change');
+      }
+    });
+  });
+
+  $(document).on('change', '#item-category_id', function() {
+    $("#item-sub_category_id").html('<option value="">Loading...</option>');
+    $.ajax({
+      type: "POST",
+      url: '<?= Url::to(['get-sub-category'])?>',
+      data: {
+        id: $(this).val()
+      },
+      success: function(result) {
+        $("#item-sub_category_id").html('<option value="">Please Select Option</option>');
+        $.each(result.data, function(idx, obj) {
+          $("#item-sub_category_id").append('<option value="' + idx + '">' + obj + '</option>');
+        });
+        $('#item-sub_category_id').trigger('change');
+      }
+    });
+  });
+// $('.select2').select2();
+</script>

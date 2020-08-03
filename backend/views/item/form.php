@@ -90,7 +90,7 @@ use backend\models\MainCategory;
               <div class="col-md-2 d-flex align-items-center pt-3">
                 <?php if(count($modeSpecArr) - 1 != $key){ ?>
                   <button class="btn btn-sm btn-remove btn-danger" type="button">
-                    <span class="fa fa-minus"></span> Delete
+                    <span class="fa fa-minus"></span> Remove
                   </button>
                 <?php } else {?>
                   <button class="btn btn-sm btn-success btn-add" type="button">
@@ -104,7 +104,7 @@ use backend\models\MainCategory;
           } 
         }
       ?>
-      <div class="fvrduplicate hide">
+      <div class="fvrduplicate d-none">
         <div class="row">
           <div class="col-md-5">
             <div class="form-group">
@@ -131,70 +131,10 @@ use backend\models\MainCategory;
 </div>
 
 <script type="text/javascript">
-
-  <?php
-    if ($model->getIsNewRecord()) {
-  ?>
-      $('.hide').hide(); 
-  <?php
-    } else {
-  ?>
-      $('.hide').show(); 
-  <?php
-    } 
-  ?>
-
   var fvrhtmlclone = '';
-  $(".fvrduplicate").after('<div class="fvrclone">'+ $('.fvrduplicate').html() +'</div>');
-
-  $(document).on('click', '.btn-add', function(e) {
-    e.preventDefault();
-    fvrhtmlclone = $(".fvrduplicate").html();
-    $(".fvrclone").append(fvrhtmlclone);
-    $(this).removeClass('btn-add').addClass('btn-remove')
-      .removeClass('btn-success').addClass('btn-danger')
-      .html('<span class="fa fa-minus"></span> Remove');
-  }).on('click', '.btn-remove', function(e) {
-    e.preventDefault();
-    $(this).parents('[class^=fvrclonned]').remove();
-    $(this).parents('[class^=fvrclonned1]').remove();
-  });
-
-
-  $('#item-main_category_id').on('change', function() {
-    $("#item-category_id").html('<option value="">Loading...</option>');
-    $.ajax({
-      type: "POST",
-      url: '<?=Url::to(['get-main-category'])?>',
-      data: {
-        id: $(this).val()
-      },
-      success: function(result) {
-        $("#item-category_id").html('<option value="">Please Select Option</option>');
-        $.each(result.data, function(idx, obj) {
-          $("#item-category_id").append('<option value="' + idx + '">' + obj + '</option>');
-        });
-        $('#item-category_id').trigger('change');
-      }
-    });
-  });
-
-  $('#item-category_id').change(function() {
-    $("#item-sub_category_id").html('<option value="">Loading...</option>');
-    $.ajax({
-      type: "POST",
-      url: '<?= Url::to(['get-sub-category'])?>',
-      data: {
-        id: $(this).val()
-      },
-      success: function(result) {
-        $("#item-sub_category_id").html('<option value="">Please Select Option</option>');
-        $.each(result.data, function(idx, obj) {
-          $("#item-sub_category_id").append('<option value="' + idx + '">' + obj + '</option>');
-        });
-        $('#item-sub_category_id').trigger('change');
-      }
-    });
-  });
-// $('.select2').select2();
+  <?php if($model->getIsNewRecord()){ ?>
+    $(".fvrduplicate").after('<div class="fvrclone">'+ $('.fvrduplicate').html() +'</div>');
+  <?php } else { ?>
+    $(".fvrduplicate").after('<div class="fvrclone"></div>');
+  <?php } ?>
 </script>
