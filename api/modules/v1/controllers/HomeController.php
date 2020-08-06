@@ -25,9 +25,10 @@ class HomeController extends HelpController
 {
     public function actionIndex()
     {
-        $headers = Yii::$app->request->headers;
-        $city_id = $headers->get('city');
-        if($city_id == null){
+        $request = Yii::$app->request->get();
+
+ 
+        if(!isset($request['city'])){
             return $this->asJson(['status' => 422, 'data' => [], 'msg'=> 'Require City']);
 
         }
@@ -54,7 +55,7 @@ class HomeController extends HelpController
                 'parent_category' => Category::PARENT_CATGORY,
                 'category_status' => 1,
             ])
-            ->andwhere(['in','VC.city_id', $headers->get('city')])
+            ->andwhere(['in','VC.city_id', $request['city']])
             ->limit(8)
             ->all();
       
@@ -74,7 +75,7 @@ class HomeController extends HelpController
                 'item_status' => 1
             ])
             ->leftJoin(['VC' => VendorCity::tableName()], 'VC.vendor_id = I.vendor_id')
-            ->orwhere(['in','VC.city_id', $headers->get('city')])
+            ->orwhere(['in','VC.city_id', $request['city']])
             ->limit(10)
             ->all();;
 
@@ -91,7 +92,7 @@ class HomeController extends HelpController
     			'C.parent_category' => Category::PARENT_CATGORY,
     			'C.category_status' => 1
     		])
-            ->andwhere(['in','VC.city_id', $headers->get('city')])
+            ->andwhere(['in','VC.city_id', $request['city']])
     		->limit(10)
             ->asArray()
     		->all();
