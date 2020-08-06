@@ -52,7 +52,7 @@ class City extends \yii\db\ActiveRecord
     * @param type $index
     * @return array
     */
-    public function get()
+    public static function get()
     {
         $categoryData = self::find()
             ->alias('C')
