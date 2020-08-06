@@ -50,7 +50,7 @@ class MainCategoryController extends CController
            
             return $this->redirect(['index']);
         }
-        return $this->render('form', [
+        return $this->renderPartial('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
         ]);
@@ -72,7 +72,7 @@ class MainCategoryController extends CController
             }
             return $this->redirect(['index']);
         }
-        return $this->render('form', [
+        return $this->renderPartial('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
 
@@ -92,7 +92,7 @@ class MainCategoryController extends CController
         $model = MainCategory::findOne($request['id']);
         $model->main_category_status = $request['status'];
         $model->save(false);
-       return $this->asJson(['status' => 200, 'msg' => ($model->category_status == 0 ? 'Deactive Successfull' :'Activate Successfull')]);
+       return $this->asJson(['status' => 200, 'msg' => ($model->main_category_status == 0 ? 'Deactive Successfull' :'Activate Successfull')]);
     }
 
 

@@ -1,130 +1,93 @@
 <?php
 
+/* @var $this \yii\web\View  */
+/* @var $model \backend\models\User*/
+/* @var $dataProvider \backend\models\UserSearch */
+
 use yii\grid\GridView;
 use backend\models\Vendor;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 
+$model = new Vendor;
 
+$name = 'Seller';
+$baseUrl = Url::to(['/vendor']);
+$modalSize = "modal-lg";
+$this->title =  'Sellers';
 
-/* @var $this \yii\web\View  */
-/* @var $model \backend\models\User*/
-/* @var $dataProvider \backend\models\UserSearch */
-
-$this->title =  'Seller Management';
 ?>
 
 <div class="container-fluid">
-      <br>
-      <br>
-      <div class="row">
-        <div class="col-md-1"></div>
-         <div class="col-md-12">
-            <div class ="card">
-               <div class="card-body">
-                <h3 class="custom-card-title"><?= $this->title ?></h3>
-            <?= Html::a('<i class="fa fa-plus-circle"></i>'.' '. 'Create', ['create'],
-                ['class' => 'btn btn-info d-none d-lg-block m-l-15 pull-right']) ?>
-          
-                <br>
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-                'columns' => [
-                    'vendor_name',
-                    'first_name',
-                    'last_name',
-                    'email',
-                    'mobile',
-                    [
-                        'attribute'=>'vendor_status',
-                        'filter'=> array("1"=>"Active","0"=>"Inactive"),
-                        'filterInputOptions' => ['prompt' =>'All'],
-                        'format' => 'raw',
-                        'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                        'value' => function ($data) {
-                            return '<input type="checkbox" '.($data->vendor_status == 1 ? 'checked' : '').' data-toggle="toggle" class="status" data-on="Ready" data-off="Not Ready" data-onstyle="primary" data-offstyle="danger" value="0">';
-                        },
-                    ],
-
-                    [
-                            'class' => \yii\grid\ActionColumn::className(),
-                            'header' => 'Actions',
-                            'template' => '{update}{delete}',
-                            'buttons' => [
-                                'update' => function ($url, $model, $key) {
-                                    $html = Html::tag('span', '', ['class' => 'fas fa-edit']);
-                                    return  Html::a($html, $url);
-                                },
-                                'delete' => function ($url, $model, $key) {
-                                    '<br>';
-                                    $html = Html::tag('span', '', ['class' => 'fas fa-trash']);
-                                    return Html::a($html, 'javascript:void(0)', [ 
-                                        'data-pjax' => '0',
-                                        'onclick' => 'test('.$model->getPrimarykey().')',
-                                        'data-method' => 'post'
-                                    ]);
-                                },
-                            ],
-                        ],
-
-                    
-                 
+  <h2 class="mt-2 mb-3"><?=$this->title?></h2>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#SellerModal">
+            <em class="fa fa-plus-circle"></em>
+            Create
+          </button>
+          <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+              'vendor_name',
+              'first_name',
+              'last_name',
+              'email',
+              'mobile',
+              [
+                'attribute'=>'vendor_status',
+                'filter'=> array("1"=>"Active","0"=>"Inactive"),
+                'filterInputOptions' => ['prompt' =>'All', 'class' => 'form-control'],
+                'headerOptions' => ['width' => '120'],
+                'format' => 'raw',
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'value' => function ($data) {
+                  return '
+                    <label class="switch sm mb-0">
+                      <input type="checkbox" class="status" id="vendorstatus-vendor_status" name="VendorStatus[vendor_status]" '.($data->vendor_status == 1 ? 'checked' : '').'>
+                      <span class="slider round"></span>
+                    </label>
+                  ';
+                },
+              ],
+              [
+                'class' => \yii\grid\ActionColumn::className(),
+                'header' => 'Actions',
+                'headerOptions' => ['width' => '200'],
+                'template' => '{update}{delete}',
+                'buttons' => [
+                  'update' => function ($url, $model, $key) {
+                    $html = Html::tag('span', '', ['class' => 'fa fa-edit']);
+                    return  Html::a($html . ' Edit', $url, [
+                      'class' => 'btn btn-sm btn-secondary edit-btn',
+                      'data-toggle' => 'modal',
+                      'data-target' => '#SellerModal'
+                    ]);
+                  },
+                  'delete' => function ($url, $model, $key) {
+                    $html = Html::tag('span', '', ['class' => 'fa fa-trash']);
+                    return Html::a($html . ' Delete', 'javascript:void(0)', [ 
+                      'class' => 'ml-2 btn btn-sm btn-danger',
+                      'data-pjax' => '0',
+                      'onclick' => 'deleteRow('.$model->getPrimarykey().')',
+                      'data-method' => 'post',
+                    ]);
+                  },
                 ],
-            ]) ?>
-               </div>
-            </div>
-         </div>
+              ],
+            ],
+          ]) ?>
+        </div>
       </div>
     </div>
+  </div>
 </div>
 
-<script type="text/javascript">
-
-  function test($url)
-  {
-    console.log($url);
-     swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Poof! Your imaginary file has been deleted!", {
-                icon: "success",
-              });
-              location.href = '<?= Url::to(['delete'])?>/'+$url;
-            } else {
-              swal("Your imaginary file is safe!");
-            }
-          });
-        return false;
-  }
-
-   $(document).ready(function(){
-  $('.status').change(function () {
-    $this = $(this);
-    var value = 0;
-    if($(this).prop("checked") == true){
-        value = 1;
-    }
-    $.ajax({
-        url: '<?= Url::to(['status'])?>',
-        data: {id: $this.closest('tr').attr('data-key'), status: value},
-        success: function (json) {
-            toastr.success(json.msg, 'Success', {timeOut: 3000})
-        }
-    });       
- });
-});
-
-</script>
-
-   
-
-
-
+<?php
+  include(Yii::$app->basePath . '/views/common/modal.php');
+?>

@@ -52,7 +52,7 @@ class SubCategoryController extends CController
 
             return $this->redirect(['index']);
         }
-        return $this->render('form', [
+        return $this->renderPartial('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
         ]);
@@ -77,7 +77,7 @@ class SubCategoryController extends CController
             return $this->redirect(['index']);
         }
        
-        return $this->render('form', [
+        return $this->renderPartial('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
         ]);

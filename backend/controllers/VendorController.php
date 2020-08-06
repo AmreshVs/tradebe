@@ -63,7 +63,7 @@ class VendorController extends CController
             return $this->redirect(['index']);
         }
      
-        return $this->render('form', ['model' => $model, 'modelCity' => $modelCity, 'modelUploadFrom' => $modelUploadFrom]);
+        return $this->renderPartial('form', ['model' => $model, 'modelCity' => $modelCity, 'modelUploadFrom' => $modelUploadFrom]);
 
     }
     public function actionUpdate($id)
@@ -99,7 +99,7 @@ class VendorController extends CController
             return $this->redirect(['index']);
         }
        
-        return $this->render('form', ['model' => $model, 'modelCity' => $modelCity, 'modelCityArr' => $modelCityArr, 'modelUploadFrom' => $modelUploadFrom]);
+        return $this->renderPartial('form', ['model' => $model, 'modelCity' => $modelCity, 'modelCityArr' => $modelCityArr, 'modelUploadFrom' => $modelUploadFrom]);
 
     }
 

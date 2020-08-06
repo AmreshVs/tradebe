@@ -30,7 +30,7 @@ class SubCategory extends \yii\db\ActiveRecord
         return [
             [['category_status', 'parent_category'], 'integer'],
             [['category_name'], 'string', 'max' => 256],
-            [['category_name', 'category_status', 'parent_category'], 'required'],
+            [['category_name', 'parent_category'], 'required'],
             ['category_image_path', 'safe'],
         ];
     }

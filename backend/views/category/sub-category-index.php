@@ -52,7 +52,7 @@ $this->title =  'Category Management';
                                     return  Html::a($html, $url);
                                 },
                                 'delete' => function ($url, $model, $key) {
-                                    $html = Html::tag('span', '', ['class' => 'fa fa-trash-o']);
+                                    $html = Html::tag('span', '', ['class' => 'fa fa fa-trash-o']);
                                     return Html::a($html, $url, [ 
                                         'data-pjax' => '0',
                                         'data-confirm' => 'Are you sure you want to delete this item?',

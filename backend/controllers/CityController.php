@@ -38,7 +38,7 @@ class CityController extends CController
             $model->save();
             return $this->asJson(['status' => 200, 'msg' => 'Saved!']);
         }
-        return $this->render('form', ['model' => $model]);
+        return $this->renderPartial('form', ['model' => $model]);
 
     }
     public function actionUpdate($id)
@@ -48,7 +48,7 @@ class CityController extends CController
             $model->save();
             return $this->redirect(['index']);
         }
-        return $this->render('form', ['model' => $model]);
+        return $this->renderPartial('form', ['model' => $model]);
 
     }
 

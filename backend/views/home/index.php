@@ -13,7 +13,7 @@ use yii\helpers\Url;
               <div class="row">
                 <div class="col-xl-4">
                   <div class="round-container text-primary">
-                    <em class="fas fa-users"></em>
+                    <em class="fa fa-users"></em>
                     <div class="round-icon bg-primary"></div>
                   </div>
                 </div>
@@ -34,7 +34,7 @@ use yii\helpers\Url;
               <div class="row">
                 <div class="col-xl-4">
                   <div class="round-container text-warning">
-                    <em class="fas fa-users"></em>
+                    <em class="fa fa-users"></em>
                     <div class="round-icon bg-warning"></div>
                   </div>
                 </div>
@@ -55,7 +55,7 @@ use yii\helpers\Url;
               <div class="row">
                 <div class="col-xl-4">
                   <div class="round-container text-success">
-                    <em class="fas fa-users"></em>
+                    <em class="fa fa-users"></em>
                     <div class="round-icon bg-success"></div>
                   </div>
                 </div>
@@ -76,7 +76,7 @@ use yii\helpers\Url;
               <div class="row">
                 <div class="col-xl-4">
                   <div class="round-container text-danger">
-                    <em class="fas fa-users"></em>
+                    <em class="fa fa-users"></em>
                     <div class="round-icon bg-danger"></div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ use yii\helpers\Url;
     </div>
     <div class="card mb-4">
       <div class="card-header">
-        <em class="fas fa-table mr-1"></em>
+        <em class="fa fa-table mr-1"></em>
         Today Orders
       </div>
       <div class="card-body">

@@ -32,7 +32,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['category_status', 'parent_category'], 'integer'],
             [['category_name'], 'string', 'max' => 256],
-            [['category_name', 'category_status', 'main_category_id'], 'required'],
+            [['category_name', 'main_category_id'], 'required'],
             ['category_image_path', 'safe'],
             ['category_name', 'unique'],
         ];

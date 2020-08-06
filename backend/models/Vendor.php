@@ -48,7 +48,6 @@ class Vendor extends \yii\db\ActiveRecord
                 //'last_name',
                 'email',
                 'mobile',
-                'vendor_status',
                 //'city_id',
             ], 'required'], 
             ['confirm_password', 'compare', 'compareAttribute'=>'password'],

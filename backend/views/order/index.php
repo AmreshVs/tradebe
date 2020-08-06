@@ -1,16 +1,20 @@
 <?php
 
+/* @var $this \yii\web\View  */
+/* @var $model \backend\models\User*/
+/* @var $dataProvider \backend\models\UserSearch */
+
 use yii\grid\GridView;
 use backend\models\Item;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
+use backend\models\Order;
 
+$model = new Order;
 
-
-/* @var $this \yii\web\View  */
-/* @var $model \backend\models\User*/
-/* @var $dataProvider \backend\models\UserSearch */
+$name = 'Order';
+$baseUrl = Url::to(['/order']);
 
 ?>
 <div class="container-fluid">
@@ -20,7 +24,10 @@ use yii\grid\ActionColumn;
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <?= Html::a('<i class="fa fa-plus-circle"></i>'.' '. 'Create', ['create'], ['class' => 'btn btn-primary pull-right mb-2']) ?>
+          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#OrderModal">
+            <em class="fa fa-plus-circle"></em>
+            Create
+          </button>
           <?= GridView::widget([
               'dataProvider' => $dataProvider,
               'filterModel' => $searchModel,
@@ -37,50 +44,7 @@ use yii\grid\ActionColumn;
     </div>
   </div>
 </div>
-</div>
 
-
-<script type="text/javascript">
-  function test($url) {
-    swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-          });
-          location.href = '<?= Url::to(['delete '])?>/' + $url;
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
-    return false;
-  }
-
-  $(document).ready(function() {
-    $('.status').change(function() {
-      $this = $(this);
-      var value = 0;
-      if ($(this).prop("checked") == true) {
-        value = 1;
-      }
-      $.ajax({
-        url: '<?= Url::to(['status '])?>',
-        data: {
-          id: $this.closest('tr').attr('data-key'),
-          status: value
-        },
-        success: function(json) {
-          toastr.success(json.msg, 'Success', {
-            timeOut: 3000
-          })
-        }
-      });
-    });
-  });
-</script>
+<?php
+  include(Yii::$app->basePath . '/views/common/modal.php');
+?>

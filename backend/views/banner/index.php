@@ -10,6 +10,10 @@ use backend\models\CategoryUploadForm;
 
 $model = new Banner;
 $modelForm = new CategoryUploadForm;
+
+$name = 'Banner';
+$baseUrl = Url::to(['/banner']);
+
 ?>
 
 
@@ -20,7 +24,7 @@ $modelForm = new CategoryUploadForm;
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <button class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#createBannerModal">
+          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#BannerModal">
             <em class="fa fa-plus-circle"></em>
             Create
           </button>
@@ -35,8 +39,13 @@ $modelForm = new CategoryUploadForm;
                 'filterInputOptions' => ['prompt' =>'All', 'class' => 'form-control'],
                 'format' => 'raw',
                 'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                'value' => function ($model) {
-                  return '<input type="checkbox" '.($model->banner_status == 1 ? 'checked' : '').' data-toggle="toggle" class="status" data-on="Ready" data-off="Not Ready" data-onstyle="primary" data-offstyle="danger" value="0">';
+                'value' => function ($data) {
+                  return '
+                    <label class="switch sm mb-0">
+                      <input type="checkbox" class="status" id="banner-banner_status" name="Banner[banner_status]" '.($data->banner_status == 1 ? 'checked' : '').'>
+                      <span class="slider round"></span>
+                    </label>
+                  ';
                 },
               ],
               [
@@ -45,16 +54,20 @@ $modelForm = new CategoryUploadForm;
                 'template' => '{update}{delete}',
                 'buttons' => [
                   'update' => function ($url, $model, $key) {
-                    $html = Html::tag('span', '', ['class' => 'fas fa-edit']);
-                    return  Html::a($html, $url);
+                    $html = Html::tag('span', '', ['class' => 'fa fa-edit']);
+                    return  Html::a($html . ' Edit', $url, [
+                      'class' => 'btn btn-sm btn-secondary edit-btn',
+                      'data-toggle' => 'modal',
+                      'data-target' => '#BannerModal'
+                    ]);
                   },
                   'delete' => function ($url, $model, $key) {
-                    '<br>';
-                    $html = Html::tag('span', '', ['class' => 'fas fa-trash']);
-                    return Html::a($html, 'javascript:void(0)', [ 
+                    $html = Html::tag('span', '', ['class' => 'fa fa-trash']);
+                    return Html::a($html . ' Delete', 'javascript:void(0)', [ 
+                      'class' => 'ml-2 btn btn-sm btn-danger',
                       'data-pjax' => '0',
-                      'onclick' => 'test('.$model->getPrimarykey().')',
-                      'data-method' => 'post'
+                      'onclick' => 'deleteRow('.$model->getPrimarykey().')',
+                      'data-method' => 'post',
                     ]);
                   },
                 ],
@@ -67,68 +80,6 @@ $modelForm = new CategoryUploadForm;
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="createBannerModal" tabindex="-1" role="dialog" aria-labelledby="createBannerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createBannerModalLabel"><?= $model->getIsNewRecord() ? 'Create Banner' : 'Update Banner' ?></h5>
-        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <?php include(Yii::$app->basePath . '/views/banner/form.php'); ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  function test($url) {
-    swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-          });
-          location.href = '<?= Url::to(['delete '])?>' + $url;
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
-    return false;
-  }
-
-  $(document).ready(function() {
-    $('.status').change(function() {
-      $this = $(this);
-      var value = 0;
-      if ($(this).prop("checked") == true) {
-        value = 1;
-      }
-      $.ajax({
-        url: '<?= Url::to(['status'])?>',
-        data: {
-          id: $this.closest('tr').attr('data-key'),
-          status: value
-        },
-        success: function(json) {
-          toastr.success(json.msg, 'Success', {
-            timeOut: 3000
-          })
-        }
-      });
-    });
-  });
-</script>
+<?php
+  include(Yii::$app->basePath . '/views/common/modal.php');
+?>

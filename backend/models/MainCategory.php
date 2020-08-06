@@ -31,7 +31,7 @@ class MainCategory extends \yii\db\ActiveRecord
         return [
             [['main_category_status'], 'integer'],
             [['main_category_name', 'main_category_image_path'], 'string', 'max' => 256],
-            [['main_category_name', 'main_category_status'], 'required'],
+            [['main_category_name'], 'required'],
             ['main_category_image_path', 'safe']
         ];
     }
