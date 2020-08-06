@@ -1,4 +1,6 @@
 <?php
+use yii\rest\UrlRule;
+
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -41,14 +43,16 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
-                   
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'country',
-                    'extraPatterns' => [
-        
+                    'class' => UrlRule::class,
+                    'controller' => [
+                        'v1/home'
                     ],
-                    
-                ]
+                    'extraPatterns' => [
+                        'OPTIONS index' => 'options',
+                        'GET index' => 'index',
+                
+                    ]
+                ],
             ],        
         ]
     ],

@@ -19,6 +19,7 @@ use api\modules\v1\models\ItemList;
  * Country Controller API
  *
  * 
+ 
  */
 class HomeController extends HelpController
 {
@@ -98,6 +99,11 @@ class HomeController extends HelpController
 
     	return $this->asJson(['status' => 200, 'data' => $result, 'msg' => 'success']);
     } 
+
+    public function actionTest()
+    {
+        die('wrk');
+    }
 
     public function actionSearch($key)
     {

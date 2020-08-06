@@ -4,6 +4,8 @@ namespace api\modules\v1\controllers;
 
 use yii\web\Controller;
 use api\modules\v1\models\Category;
+use yii\filters\Cors;
+use yii\filters\auth\HttpBearerAuth;
 
 
 /**
@@ -13,6 +15,58 @@ use api\modules\v1\models\Category;
  */
 class HelpController extends Controller
 {
+     /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+         unset($behaviors['authenticator']);
+        // unset($behaviors['verbFilter']);
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::class,
+            'cors' => [
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+                'Access-Control-Request-Headers' => [
+                    'Authorization',
+                    'Cache-Control',
+                    'Accept',
+                    'Content-Type'
+                ],
+                'Access-Control-Expose-Headers' => [
+                    'X-Pagination-Current-Page',
+                    'X-Pagination-Total-Count',
+                    'X-Pagination-Page-Count',
+                    'X-Pagination-Per-Page'
+                ],
+
+            ]
+        ];
+        // $behaviors['authenticator'] = [
+        //     'class' => HttpBearerAuth::class,
+        //     'optional' => [
+        //         'home/*',
+        //     ]
+        // ];
+      
+        return $behaviors;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'options' => OptionsAction::class,
+            // 'collectionOptions' => ['GET', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']
+        ];
+    }
+
+
     
      /**
      * @param array $request
