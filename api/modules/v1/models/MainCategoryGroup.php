@@ -15,7 +15,7 @@ use yii\db\Expression;
  * @property int|null $main_category_status
  * @property string|null $main_category_image_path
  */
-class MainCategory extends \yii\db\ActiveRecord
+class MainCategoryGroup extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -68,13 +68,13 @@ class MainCategory extends \yii\db\ActiveRecord
                 ->select([
                     '*',
                     'sub_category_limit' => new Expression('1'),
-                    'limit' => new Expression('10'),
+                    'limit' => new Expression('4'),
                 ])
                 ->where([
                     'main_category_id' => $this->main_category_id,
                     'category_status' => 1
                 ])
-                ->limit(8)
+                ->limit(6)
                 ->all();
             },
         ]; 

@@ -50,7 +50,9 @@ class Banner extends \yii\db\ActiveRecord
     {
         return [
             'banner_id', 
-            'banner_name',
+            'banner_name'=> function ($model) {
+                return ucfirst($model->banner_name);
+            },
             'banner_image_path'
         ];
 

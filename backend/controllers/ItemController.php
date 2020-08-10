@@ -5,6 +5,8 @@ use backend\models\Category;
 use backend\models\Item;
 use backend\models\ItemSearch;
 use backend\models\ItemSpecification;
+use backend\models\ItemImage;
+
 use common\components\CController;
 use Yii;
 use yii\db\Expression;
@@ -154,6 +156,15 @@ class ItemController extends CController
                 $model->sub_category_id = $sub_category->category_id;
                 $model->save();
             }
+        }
+    }
+
+    public function actionItemImage()
+    {
+        $modelArr = ItemImage::find()->all();
+        foreach ($modelArr as $key => $model) {
+            $model->image_path = str_replace("item/","/upload/",$model->image_path);
+            $model->save();
         }
     }
 }

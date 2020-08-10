@@ -53,7 +53,9 @@ class SubCategory extends \yii\db\ActiveRecord
     {
         return [
             'sub_category_id' => 'category_id', 
-            'sub_category_name' => 'category_name',
+            'sub_category_name' => function ($model) {
+                return ucfirst($model->category_name);
+            },
             'sub_category_image_path' => 'category_image_path',
     
         ];

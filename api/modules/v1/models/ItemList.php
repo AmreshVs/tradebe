@@ -73,8 +73,12 @@ class ItemList extends \yii\db\ActiveRecord
     {
         return [
             'item_id',
-            'item_name',
-            'unit_name',
+            'item_name'  => function ($model) {
+                return ucfirst($model->item_name);
+            },
+            'unit_name'  => function ($model) {
+                return ucfirst($model->unit_name);
+            },
             'price',
             'item_image' => function (self $model) {
                 return ItemImage::find()->select([

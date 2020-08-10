@@ -10,6 +10,7 @@ use api\modules\v1\models\Banner;
 use api\modules\v1\models\CategoryGroup;
 use api\modules\v1\models\ItemHome;
 use api\modules\v1\models\VendorCity;
+use api\modules\v1\models\MainCategoryGroup;
 use yii\db\Expression;
 use Yii;
 use api\modules\v1\models\ItemList;
@@ -28,10 +29,7 @@ class HomeController extends HelpController
         $request = Yii::$app->request->get();
 
  
-        if(!isset($request['city'])){
-            return $this->asJson(['status' => 422, 'data' => [], 'msg'=> 'Require City']);
-
-        }
+        
 
     	$result['header_category'] = MainCategory::find()
     		->where([
@@ -42,7 +40,7 @@ class HomeController extends HelpController
 
     	$result['banner'] = Banner::find()->where(['banner_status' => 1])->all();
 
-        $result['category_with_subcategory'] = Category::find()
+        $category_with_subcategory = Category::find()
             ->alias('C')
             ->select([
                 'C.*',
@@ -54,32 +52,42 @@ class HomeController extends HelpController
             ->where([
                 'parent_category' => Category::PARENT_CATGORY,
                 'category_status' => 1,
-            ])
-            ->andwhere(['in','VC.city_id', $request['city']])
-            ->limit(8)
-            ->all();
+            ]);
+
+            if(isset($request['city'])){
+                $category_with_subcategory = $category_with_subcategory->andwhere(['in','VC.city_id', $request['city']]);
+            }
+
+            $result['category_with_subcategory'] = $category_with_subcategory->limit(8)
+                ->all();
       
-    	$result['category_group'] = MainCategory::find()
+    	$category_group = MainCategoryGroup::find()
             ->alias('C')
             ->leftJoin(['I' => ItemList::tableName()], 'I.main_category_id = C.main_category_id')
             ->leftJoin(['VC' => VendorCity::tableName()], 'VC.vendor_id = I.vendor_id')
             ->where([
                 'main_category_status' => 1
-            ])
-            ->limit(8)
+            ]);
+            if(isset($request['city'])){
+                $category_group = $category_group->andwhere(['in','VC.city_id', $request['city']]);
+            }
+            $result['category_group'] = $category_group->limit(8)
             ->all();
 
-    	$result['products'] = ItemHome::find()
+    	$products = ItemHome::find()
             ->alias('I')
             ->where([
                 'item_status' => 1
             ])
-            ->leftJoin(['VC' => VendorCity::tableName()], 'VC.vendor_id = I.vendor_id')
-            ->orwhere(['in','VC.city_id', $request['city']])
-            ->limit(10)
-            ->all();;
+            ->leftJoin(['VC' => VendorCity::tableName()], 'VC.vendor_id = I.vendor_id');
+             if(isset($request['city'])){
+                $products = $products->andwhere(['in','VC.city_id', $request['city']]);
+            }
+            $result['products'] = $products->limit(10)
+            ->all();
 
-    	$result['all_category'] = Category::find()
+
+    	$all_category = Category::find()
             ->alias('C')
             ->leftJoin(['I' => ItemList::tableName()], 'I.category_id = C.category_id')
             ->leftJoin(['VC' => VendorCity::tableName()], 'VC.vendor_id = I.vendor_id')
@@ -91,9 +99,11 @@ class HomeController extends HelpController
     		->where([
     			'C.parent_category' => Category::PARENT_CATGORY,
     			'C.category_status' => 1
-    		])
-            ->andwhere(['in','VC.city_id', $request['city']])
-    		->limit(10)
+    		]);
+            if(isset($request['city'])){
+                $all_category = $all_category->andwhere(['in','VC.city_id', $request['city']]);
+            }
+            $result['all_category'] = $all_category->limit(11)
             ->asArray()
     		->all();
     

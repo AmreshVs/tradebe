@@ -45,4 +45,16 @@ class ItemSpecification extends \yii\db\ActiveRecord
             'item_id' => Yii::t('app', 'Item ID'),
         ];
     }
+
+     public function fields()
+    {
+        return [
+            'item_specification_name' => function ($model) {
+                return ucfirst($model->item_specification_name);
+            },  
+            'item_specification_value' => function ($model) {
+                return ucfirst($model->item_specification_value);
+            },
+        ];
+    }
 }
