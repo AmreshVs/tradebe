@@ -72,8 +72,10 @@ class MainCategory extends \yii\db\ActiveRecord
                 ])
                 ->where([
                     'main_category_id' => $this->main_category_id,
+                    'parent_category' => Category::PARENT_CATGORY,
                     'category_status' => 1
                 ])
+                ->orderBy(['category_id' => SORT_ASC])
                 ->limit(8)
                 ->all();
             },

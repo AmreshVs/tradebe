@@ -35,6 +35,7 @@ class HomeController extends HelpController
     		->where([
     			'main_category_status' => 1
     		])
+            ->orderBy(['main_category_id' => SORT_ASC])
     		->limit(8)
     		->all();
 
@@ -71,7 +72,7 @@ class HomeController extends HelpController
             if(isset($request['city'])){
                 $category_group = $category_group->andwhere(['in','VC.city_id', $request['city']]);
             }
-            $result['category_group'] = $category_group->limit(8)
+            $result['category_group'] = $category_group->orderBy(['main_category_id' => SORT_ASC])->limit(8) 
             ->all();
 
     	$products = ItemHome::find()
