@@ -68,7 +68,7 @@ class MainCategoryGroup extends \yii\db\ActiveRecord
                 ->select([
                     '*',
                     'sub_category_limit' => new Expression('1'),
-                    'limit' => new Expression('6'),
+                    'limit' => new Expression('3'),
                 ])
                 ->where([
                     'main_category_id' => $this->main_category_id,
