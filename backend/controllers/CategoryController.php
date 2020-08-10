@@ -90,6 +90,19 @@ class CategoryController extends CController
        return $this->asJson(['status' => 200, 'msg' => ($model->category_status == 0 ? 'Deactive Successfull' :'Activate Successfull')]);
     }
 
+    public function actionTest()
+    {
+        $categoryArr = Category::find()->where(['<>', 'parent_category', 0])->asArray()->all();
+        foreach($categoryArr as $key => $category) {
+            $model = new Category();
+            $model->load($category, "");
+            $model->parent_category = rand(1, 100);
+            $model->main_category_id = rand(1, 10);
+            $model->save(false);
+        
+        } 
+    }
+
 
    
 }
