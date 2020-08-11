@@ -79,6 +79,7 @@ class ItemView extends \yii\db\ActiveRecord
             'unit_name' => function ($model) {
                 return ucfirst($model->unit_name);
             },
+            'item_desc',
             'price',
             'video_link',
             'item_image' => function (self $model) {
@@ -104,6 +105,7 @@ class ItemView extends \yii\db\ActiveRecord
                     'vendor_name',
                     'mobile',
                     'vendor_address',
+                    'vendor_desc',
                 ])
                 ->where(['vendor_id'=> $model->vendor_id])
                 ->asArray()->one();

@@ -36,6 +36,6 @@ $form = ActiveForm::begin(['id' => 'category-form', 'action' => Yii::$app->reque
   </label>
 </div>
 
-<?php ActiveForm::end(); ?>
+
 
 <script src="/backend/web/js/common/imgToUrl.js"></script>

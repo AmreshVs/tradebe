@@ -1,4 +1,6 @@
 <?php
+use yii\bootstrap\ActiveForm;
+
   if(isset($name)){
     $modalName = str_replace(' ', '', $name).'Modal';
     $modalHeading = $model->getIsNewRecord() ? 'Create ' . $name : 'Update '. $name;
@@ -26,7 +28,7 @@
               <em class="fa fa-times-circle"></em>
               Close
             </button>
-            <button type="button" class="btn btn-primary" id="save">
+            <button type="submit" class="btn btn-primary" id="save">
               <em class="fa fa-save"></em>
               Submit
             </button>
@@ -34,6 +36,7 @@
         </div>
       </div>
     </div>
+
 <?php
   }
 ?>
@@ -72,6 +75,7 @@
 
       $('#save').on('click', function() {
         let form = $('.modal-body form');
+       
         let url = form.attr('action');
         let modalBody = $('#<?=$modalName?> .modal-body');
 
