@@ -75,11 +75,12 @@ class HelpController extends Controller
      */
     protected function checkRequiredParam(array $request, $params)
     {
+
         $params = (array)$params;
 
         foreach ($params as $param) {
             if (!array_key_exists($param, $request)) {
-                return (['status' => 401,'missing-param' => $param]);
+                return (['status' => 401,'param' => $param]);
               
             }
         }

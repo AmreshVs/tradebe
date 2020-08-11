@@ -102,10 +102,18 @@ class ProductController extends HelpController
     public function actionBooking()
     {
         $request = Yii::$app->request->post();
-        $headers = Yii::$app->request->headers;
-        $city_id = $headers->get('city');
-        if($city_id == null){
-            return $this->asJson(['status' => 422, 'data' => [], 'msg'=> 'Require City']);
+        // $headers = Yii::$app->request->headers;
+        // $city_id = $headers->get('city');
+        $data = $this->checkRequiredParam($request, [
+            'item_id',
+            'customer_name',
+            'mobile_number',
+            'price_range',
+            'qty',
+            'city',
+        ]);
+        if($data != []){
+            return $this->asJson(['status' => 422, 'data' => [], 'msg'=> 'Missing params '. $data['param']]);
 
         }
          $modelItem = ItemList::find()->where([
@@ -126,7 +134,7 @@ class ProductController extends HelpController
         $model->price_range = $request['price_range'];
         $model->qty = $request['qty'];
         $model->vendor_id = $modelItem->vendor_id;
-        $model->city_id = $city_id;
+        $model->city_id = $request['city'];
         $model->order_status = 1;
         $model->created_at = date('Y-m-d H:i:s');
         $model->save(false);
