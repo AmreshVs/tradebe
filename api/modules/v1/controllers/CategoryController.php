@@ -10,6 +10,9 @@ use api\modules\v1\models\CategoryGroup;
 use yii\db\Expression;
 use Yii;
 use api\modules\v1\models\MainCategory;
+use api\modules\v1\models\MainCategoryGroup;
+
+
 
 
 
@@ -55,7 +58,7 @@ class CategoryController extends HelpController
     public function actionViewAllCategoryGroup($main_category_id)
     {
  
-        $result = MainCategory::find()
+        $result = MainCategoryGroup::find()
             ->where([
                 'main_category_status' => 1,
                 'main_category_id' => $main_category_id
