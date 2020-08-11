@@ -10,8 +10,7 @@ use api\modules\v1\models\Category;
 use api\modules\v1\models\Order;
 use api\modules\v1\models\Vendor;
 use api\modules\v1\models\ItemSpecification;
-
-
+use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use Yii;
 
@@ -40,14 +39,20 @@ class ProductController extends HelpController
             ->asArray()
             ->one();
 
-        $result['products']  = ItemList::find()
+        $query  = ItemList::find()
             ->alias('I')
             ->where([
                 'I.sub_category_id' => $sub_category_id,
                 'item_status' => 1,
-            ])
+            ]);
 
-            ->all();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'defaultPageSize' => 20, //set page size here
+            ]
+        ]);
+        $result['products'] = $dataProvider->getModels();
     	
     
         return $this->asJson(['status' => 200, 'data' => $result, 'msg' => 'Products list Successfully']);
@@ -86,7 +91,7 @@ class ProductController extends HelpController
                 'I.sub_category_id' => $model->sub_category_id,
                 'I.item_status' => 1,
             ])
-
+            ->limit(10)
             ->all();
         
     

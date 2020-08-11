@@ -106,6 +106,11 @@ class ItemView extends \yii\db\ActiveRecord
                     'mobile',
                     'vendor_address',
                     'vendor_desc',
+                    'Gstin',
+                    'company_since',
+                    'business_nature',
+                    'member_since',
+                    'website',
                 ])
                 ->where(['vendor_id'=> $model->vendor_id])
                 ->asArray()->one();

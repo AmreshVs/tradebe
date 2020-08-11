@@ -103,6 +103,7 @@ class ItemList extends \yii\db\ActiveRecord
                     'vendor_name',
                     'mobile',
                     'vendor_address',
+                   
                 ])
                 ->where(['vendor_id'=> $model->vendor_id])
                 ->asArray()->one();
