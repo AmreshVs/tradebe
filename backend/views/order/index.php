@@ -24,10 +24,7 @@ $baseUrl = Url::to(['/order']);
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#OrderModal">
-            <em class="fa fa-plus-circle"></em>
-            Create
-          </button>
+       
           <?= GridView::widget([
               'dataProvider' => $dataProvider,
               'filterModel' => $searchModel,
