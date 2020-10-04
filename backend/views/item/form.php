@@ -136,16 +136,17 @@ use backend\models\MainCategory;
       </div>
 
              <div class="modal-footer">
+                        <a href="<?=Url::to(['/item']) ?>">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                           <em class="fa fa-times-circle"></em>
-                          Close
+                          Back
                         </button>
+                      </a>
                          <button type="submit" class="btn btn-primary" id="save">
                           <em class="fa fa-save"></em>
                           Submit
                         </button>
-                     
-                      
+                    
               </div>
               <?php ActiveForm::end(); ?>
         </div>

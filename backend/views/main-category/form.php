@@ -52,10 +52,12 @@ $form = ActiveForm::begin(['id' => 'category-form']);
             </label>
           </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              <em class="fa fa-times-circle"></em>
-              Close
-            </button>
+            <a href="<?=Url::to(['/main-category']) ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                          <em class="fa fa-times-circle"></em>
+                          Back
+                        </button>
+                      </a>
             <button type="submit" class="btn btn-primary" id="save">
               <em class="fa fa-save"></em>
               Submit

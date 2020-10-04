@@ -53,10 +53,12 @@ $form = ActiveForm::begin(['id' => 'category-form', 'action' => Yii::$app->reque
           </div>
 
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              <em class="fa fa-times-circle"></em>
-              Close
-            </button>
+            <a href="<?=Url::to(['/sub-category']) ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                          <em class="fa fa-times-circle"></em>
+                          Back
+                        </button>
+                      </a>
             <button type="submit" class="btn btn-primary" id="save">
               <em class="fa fa-save"></em>
               Submit

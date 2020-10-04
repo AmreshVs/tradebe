@@ -50,10 +50,12 @@ $form = ActiveForm::begin(['id' => 'category-form']);
             </div>
 
              <div class="modal-footer">
+                      <a href="<?=Url::to(['/banner']) ?>">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                           <em class="fa fa-times-circle"></em>
-                          Close
+                          Back
                         </button>
+                      </a>
                          <button type="submit" class="btn btn-primary" id="save">
                           <em class="fa fa-save"></em>
                           Submit
