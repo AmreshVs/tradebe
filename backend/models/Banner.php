@@ -31,6 +31,7 @@ class Banner extends \yii\db\ActiveRecord
 						[['banner_status'], 'integer'],
 						[['banner_name', 'banner_image_path'], 'string', 'max' => 256],
 						[['banner_name'], 'required'],
+						['banner_status', 'safe']
 
 				];
 		}

@@ -37,6 +37,7 @@ class MainCategoryController extends CController
         $model = new MainCategory();
         $modelUploadFrom = new CategoryUploadForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+           // print_r($_FILES); die;
             $model->save();
 
             $modelUploadFrom->file = UploadedFile::getInstance($modelUploadFrom, 'file');
@@ -50,10 +51,12 @@ class MainCategoryController extends CController
            
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+     return $this->render('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
         ]);
+        
+       // return $this->asJson($file);
 
     }
     public function actionUpdate($id)
@@ -72,7 +75,8 @@ class MainCategoryController extends CController
             }
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+       // print_r($model); die;
+        return $this->render('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
 

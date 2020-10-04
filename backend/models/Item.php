@@ -69,4 +69,10 @@ class Item extends \yii\db\ActiveRecord
             'item_status' => Yii::t('app', 'Item Status'),
         ];
     }
+
+
+    public function getName($item_id) {
+        $model = Item::findOne(['item_id' => $item_id]);
+        return isset($model->item_name) ? $model->item_name : '-';
+    }
 }

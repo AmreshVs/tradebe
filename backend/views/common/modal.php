@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
           <div class="modal-body">
 
           </div>
-          <div class="modal-footer">
+        <!--   <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               <em class="fa fa-times-circle"></em>
               Close
@@ -32,7 +32,7 @@ use yii\bootstrap\ActiveForm;
               <em class="fa fa-save"></em>
               Submit
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -67,18 +67,19 @@ use yii\bootstrap\ActiveForm;
         renderModal();
       });
 
-      $('.edit-btn').on('click', function(e){
-        $('.modal-title').html('Update <?=$name?>');
-        e.preventDefault();
-        renderModal(e.currentTarget.href, 'update');
-      });
+      // $('.edit-btn').on('click', function(e){
+      //   alert()
+      //   $('.modal-title').html('Update <?=$name?>');
+      //   e.preventDefault();
+      //   renderModal(e.currentTarget.href, 'update');
+      // });
 
-      $('#save').on('click', function() {
-        let form = $('.modal-body form');
-       
+       $('body').on('submit','form#category-form',function() {
+        let form = $('.modal-body form'), formData, $btn;
+//       alert();
         let url = form.attr('action');
         let modalBody = $('#<?=$modalName?> .modal-body');
-
+         //form = new form(this);
         $.ajax({
           url: url,
           method: 'POST',
@@ -91,8 +92,11 @@ use yii\bootstrap\ActiveForm;
               modalBody.html(data);
             }
           }
-        })
+        });
+       // return false;
       });
+
+       
 
       function deleteRow($url) {
         swal({

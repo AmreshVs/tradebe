@@ -7,10 +7,20 @@ use backend\models\City;
 
 ?>
 
-<div class="row">
-  <div class="col-md-12">
     <?php $form = ActiveForm::begin(['id' => 'vendor-form']); ?>
-    <div class="form-group">
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+        
+          <h3 class="mt-2 mb-3"><?= $model->getIsNewRecord() ? 'Create Seller' : 'Update Seller' ?></h3>
+
+            <div class="form-group">
       <label>Image</label>
       <?php if(!$model->getIsNewRecord()){ ?>
       <img src="<?= $model->vendor_image_path ?>" alt="..." width="500" height="200" class="img-thumbnai" />
@@ -74,19 +84,39 @@ use backend\models\City;
           <?= $form->field($modelCity, 'city_id[]')->dropDownList(City::get(), ['class' => 'select2 form-control required', '' => true, 'required' => true]); ?>
         </div>
       </div>
+
       <div class="col-md-6">
       <div class="form-group">
         <label class="w-100">Status</label>
         <label class="switch">
-          <input type="checkbox" id="vendorstatus-vendor_status" name="VendorStatus[vendor_status]" value="1">
+          <input type="checkbox" id="banner-vendor_status" name="Banner[vendor_status]" onclick="if($(this).prop('checked') == true) { $(this).val(1) } else {$(this).val(0) }" value="<?= $model->vendor_status == null ? 0 : $model->vendor_status ?>">
+  
           <span class="slider round"></span>
         </label>
       </div>
       </div>
     </div>
-    <?php ActiveForm::end(); ?>
+
+             <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                          <em class="fa fa-times-circle"></em>
+                          Close
+                        </button>
+                         <button type="submit" class="btn btn-primary" id="save">
+                          <em class="fa fa-save"></em>
+                          Submit
+                        </button>
+                     
+                      
+              </div>
+              <?php ActiveForm::end(); ?>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
 
 <script src="/backend/web/js/common/imgToUrl.js"></script>
 <script type="text/javascript">

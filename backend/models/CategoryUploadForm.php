@@ -27,7 +27,7 @@ class CategoryUploadForm extends \yii\db\ActiveRecord
     {
         return [
             [['file'], 'file'],
-            //['file', 'required'],
+            ['file', 'safe'],
         ];
     }
 

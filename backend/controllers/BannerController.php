@@ -50,14 +50,16 @@ class BannerController extends CController
            
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+      return $this->render('form', [
             'model' => $model,
-            'modelFrom'=> $modelUploadFrom
+            'modelForm'=> $modelUploadFrom
         ]);
+        return $this->asJson($data);
 
     }
     public function actionUpdate($id)
     {
+       // print_r($_POST); die;
         $model = Banner::findOne($id);
         $modelUploadFrom = new CategoryUploadForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -72,9 +74,9 @@ class BannerController extends CController
             }
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+        return $this->render('form', [
             'model' => $model,
-            'modelFrom'=> $modelUploadFrom
+            'modelForm'=> $modelUploadFrom
 
         ]);
 

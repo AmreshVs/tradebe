@@ -7,6 +7,14 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\components\CController;
+use backend\models\Order;
+use backend\models\Vendor;
+use common\models\User;
+use backend\models\City;
+
+
+
+
 
 
 /**
@@ -23,7 +31,21 @@ class HomeController extends CController
     public function actionIndex()
     {
         //die();
-        return $this->render('index');
+        $orderCount = Order::Find()->count();
+        $sellerCount = Vendor::find()->count();
+        $userCount = User::find()->count();
+        $cityCount = City::find()->count();
+        $todayOrders = Order::find()->where(['date(created_at)' => date('Y-m-d')])->all();
+
+        return $this->render('index',[
+            'orderCount' => $orderCount,
+            'sellerCount' => $sellerCount,
+            'userCount' => $userCount,
+            'cityCount' => $cityCount,
+            'todayOrders' => $todayOrders,
+
+
+        ]);
     }
 
     public function actionLogin()

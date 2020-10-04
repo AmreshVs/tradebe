@@ -14,7 +14,7 @@ $model = new MainCategory;
 
 $name = 'Main-Category';
 $baseUrl = Url::to(['/main-category']);
-
+$modalName = 'MainCategory';
 $this->title = 'Main Category';
 ?>
 
@@ -26,10 +26,12 @@ $this->title = 'Main Category';
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <button id="create" class="btn btn-primary pull-right mb-2" data-toggle="modal" data-target="#Main-CategoryModal">
+             <a href="<?= Url::to(['create']) ?>">
+          <button id="create" class="btn btn-primary pull-right mb-2" >
             <em class="fa fa-plus-circle"></em>
             Create
           </button>
+        </a>
           <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
@@ -59,8 +61,7 @@ $this->title = 'Main Category';
                     $html = Html::tag('span', '', ['class' => 'fa fa-edit']);
                     return  Html::a($html . ' Edit', $url, [
                       'class' => 'btn btn-sm btn-secondary edit-btn',
-                      'data-toggle' => 'modal',
-                      'data-target' => '#Main-CategoryModal'
+                     
                     ]);
                   },
                   'delete' => function ($url, $model, $key) {

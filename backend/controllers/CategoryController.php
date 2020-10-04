@@ -53,7 +53,7 @@ class CategoryController extends CController
            
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+        return $this->render('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
         ]);
@@ -67,7 +67,7 @@ class CategoryController extends CController
             $model->save();
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', [
+        return $this->render('form', [
             'model' => $model,
             'modelFrom'=> $modelUploadFrom
 

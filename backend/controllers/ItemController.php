@@ -61,7 +61,7 @@ class ItemController extends CController
             }
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', ['model' => $model]);
+        return $this->render('form', ['model' => $model]);
     }
     public function actionUpdate($id)
     {
@@ -90,7 +90,7 @@ class ItemController extends CController
             return $this->redirect(['index']);
         }
 
-        return $this->renderPartial('form', [
+        return $this->render('form', [
             'model' => $model,
             'modeSpecArr' => $modeSpecArr,
         ]);

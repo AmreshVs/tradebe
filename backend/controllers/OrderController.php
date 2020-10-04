@@ -7,6 +7,10 @@ use backend\models\Item;
 use backend\models\ItemSpecification;
 use backend\models\OrderSearch;
 use backend\models\Category;
+use backend\models\Vendor;
+use backend\models\Order;
+
+
 
 use common\models\LoginForm;
 
@@ -43,6 +47,24 @@ class OrderController extends CController
         $model->item_status = $request['status'];
         $model->save(false);
        return $this->asJson(['status' => 200, 'msg' => ($model->item_status == 0 ? 'Deactive Successfull' :'Activate Successfull')]);
+    }
+
+    public function actionView($id) {
+        $order = Order::find()->where(['order_id' =>$id])->one();
+        $OrderItem = Item::find()->where(['item_id' =>$order->item_id])->one();
+        $OrderVendor = Vendor::find()->where(['vendor_id' =>$order->vendor_id])->one();
+
+        $data = $this->renderPartial('order-view',[
+            'order' => $order,
+            'item' => $OrderItem,
+            'vendor' => $OrderVendor,
+
+
+        ]);
+
+        return $this->asJson($data);
+
+
     }
 
     

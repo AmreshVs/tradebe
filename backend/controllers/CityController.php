@@ -36,9 +36,10 @@ class CityController extends CController
         $model = new City();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
-            return $this->asJson(['status' => 200, 'msg' => 'Saved!']);
+            return $this->redirect(['index']);
+            //return $this->asJson(['status' => 200, 'msg' => 'Saved!']);
         }
-        return $this->renderPartial('form', ['model' => $model]);
+        return $this->render('form', ['model' => $model]);
 
     }
     public function actionUpdate($id)
@@ -48,7 +49,7 @@ class CityController extends CController
             $model->save();
             return $this->redirect(['index']);
         }
-        return $this->renderPartial('form', ['model' => $model]);
+        return $this->render('form', ['model' => $model]);
 
     }
 
