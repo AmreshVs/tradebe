@@ -42,7 +42,7 @@ $form = ActiveForm::begin(['id' => 'category-form', 'action' => Yii::$app->reque
                 <?= $form->field($model, 'category_name')->textInput() ?>
               </div>
               <div class="form-group">
-                <?= $form->field($model, 'main_category_id')->dropDownList(MainCategory::get(), ['prompt' => 'Please select a Category', 'class' => 'select2 form-control']); ?>
+                <?= $form->field($model, 'main_category_id')->dropDownList((new MainCategory())->get(), ['prompt' => 'Please select a Category', 'class' => 'select2 form-control']); ?>
               </div>
               <div class="form-group">
                 <label class="w-100">Status</label>
